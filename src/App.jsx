@@ -8,6 +8,7 @@ const HomePage = lazy(() => import('./pages/HomePage'));
 const ScannerPage = lazy(() => import('./pages/ScannerPage'));
 const ResultsPage = lazy(() => import('./pages/ResultsPage'));
 const CompanyDashboard = lazy(() => import('./pages/CompanyDashboard'));
+const UserDashboard = lazy(() => import('./pages/UserDashboard'));
 const LeaderboardPage = lazy(() => import('./pages/LeaderboardPage'));
 const ImpactPage = lazy(() => import('./pages/ImpactPage'));
 
@@ -21,6 +22,7 @@ function App() {
             <Route path="scan" element={<ScannerPage />} />
             <Route path="results" element={<ResultsPage />} />
             <Route path="company" element={<CompanyDashboard />} />
+            <Route path="dashboard" element={<UserDashboard />} />
             <Route path="leaderboard" element={<LeaderboardPage />} />
             <Route path="impact" element={<ImpactPage />} />
           </Route>

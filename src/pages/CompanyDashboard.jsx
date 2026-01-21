@@ -293,6 +293,11 @@ const CompanyDashboard = () => {
                         <GlassInput label="Password" type="password" placeholder="••••••••" required />
                         <GlassButton type="submit" className="w-full">Sign In</GlassButton>
                     </form>
+                    <div className="text-center">
+                        <a href="/dashboard" className="text-sm text-forest-600 hover:text-forest-900 underline">
+                            Are you a customer? Sign in here
+                        </a>
+                    </div>
                 </GlassCard>
             </div>
         );
@@ -302,8 +307,8 @@ const CompanyDashboard = () => {
         <div className="max-w-4xl mx-auto pb-20">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                 <div>
-                    <h1 className="text-3xl font-bold text-forest-900">Dashboard</h1>
-                    <p className="text-forest-700">Manage your eco-impact campaigns</p>
+                    <h1 className="text-3xl font-bold text-forest-900">Partner Dashboard</h1>
+                    <p className="text-forest-700">Manage your recycling campaigns & bottles</p>
                 </div>
                 <div className="flex gap-2">
                     <GlassButton variant="secondary" size="sm" icon={<LogOut size={16} />} onClick={() => setIsAuthenticated(false)}>
@@ -345,18 +350,19 @@ const CompanyDashboard = () => {
                     {activeTab === 'analytics' && (
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <GlassCard className="p-6">
-                                <p className="text-sm font-bold text-forest-500 uppercase">Total Scans</p>
-                                <p className="text-4xl font-bold text-forest-900 mt-2">1,234</p>
-                                <p className="text-xs text-forest-600 mt-1">+12% from last week</p>
+                                <p className="text-sm font-bold text-forest-500 uppercase">Active Campaigns</p>
+                                <p className="text-4xl font-bold text-forest-900 mt-2">{campaigns.length}</p>
+                                <p className="text-xs text-forest-600 mt-1">Total campaigns running</p>
                             </GlassCard>
                             <GlassCard className="p-6">
-                                <p className="text-sm font-bold text-amber-500 uppercase">Rewards Claimed</p>
-                                <p className="text-4xl font-bold text-forest-900 mt-2">$540</p>
-                                <p className="text-xs text-forest-600 mt-1">54,000 points redeemed</p>
+                                <p className="text-sm font-bold text-amber-500 uppercase">Bottles Registered</p>
+                                <p className="text-4xl font-bold text-forest-900 mt-2">24</p>
+                                <p className="text-xs text-forest-600 mt-1">In your catalog</p>
                             </GlassCard>
                             <GlassCard className="p-6">
-                                <p className="text-sm font-bold text-blue-500 uppercase">Active Locations</p>
+                                <p className="text-sm font-bold text-blue-500 uppercase">Collection Points</p>
                                 <p className="text-4xl font-bold text-forest-900 mt-2">{locations.length}</p>
+                                <p className="text-xs text-forest-600 mt-1">Active locations</p>
                             </GlassCard>
                         </div>
                     )}
