@@ -27,11 +27,11 @@ const LeaderboardPage = () => {
             <div className="flex items-center gap-4">
                 <button
                     onClick={() => navigate('/')}
-                    className="p-2 rounded-full bg-forest-100/10 hover:bg-forest-100/20 text-forest-500 transition-colors"
+                    className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
                 >
                     <ArrowLeft size={24} />
                 </button>
-                <h1 className="text-2xl font-bold text-forest-500">Leaderboard</h1>
+                <h1 className="text-2xl font-bold text-white">Leaderboard</h1>
             </div>
 
             {/* Toggle */}
@@ -40,7 +40,7 @@ const LeaderboardPage = () => {
                     <button
                         key={p}
                         onClick={() => setPeriod(p)}
-                        className={`flex-1 py-2 rounded-full text-sm font-bold transition-all ${period === p ? 'bg-forest-500 text-white shadow-lg' : 'text-forest-500 hover:bg-white/10'
+                        className={`flex-1 py-2 rounded-full text-sm font-bold transition-all ${period === p ? 'bg-green-500 text-white shadow-lg' : 'text-gray-300 hover:bg-white/5'
                             }`}
                     >
                         {p === 'weekly' ? 'Weekly' : 'All Time'}

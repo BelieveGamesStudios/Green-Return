@@ -128,7 +128,7 @@ const HomePage = () => {
                         </GlassCard>
                     ))}
                     {trendingCampaigns.length === 0 && (
-                        <div className="text-center py-8 text-forest-500 font-medium">
+                        <div className="text-center py-8 text-forest-300 font-medium">
                             <p>No campaigns available yet</p>
                         </div>
                     )}
