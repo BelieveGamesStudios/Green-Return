@@ -20,9 +20,8 @@ const GlassInput = ({ label, error, icon, className = '', id, ...props }) => {
 
                 <input
                     id={id}
-                    placeholder=" "
                     className={`
-            w-full bg-white/5 backdrop-blur-md
+            peer w-full bg-white/5 backdrop-blur-md
             border border-white/10
             rounded-xl py-3 px-4
             text-forest-950 dark:text-white 
@@ -44,9 +43,8 @@ const GlassInput = ({ label, error, icon, className = '', id, ...props }) => {
             text-white/50 text-base
             pointer-events-none
             transition-all duration-300
-            peer-placeholder-shown:top-3 peer-placeholder-shown:text-base
-            group-focus-within:-top-6 group-focus-within:text-xs group-focus-within:text-forest-400
-            ${props.value ? '-top-6 text-xs text-forest-400' : ''}
+            peer-focus:-top-6 peer-focus:text-xs peer-focus:text-forest-400
+            ${props.value && props.value.length > 0 ? '-top-6 text-xs text-forest-400' : ''}
             ${icon ? 'left-12' : ''}
           `}
                 >

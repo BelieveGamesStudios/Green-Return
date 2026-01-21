@@ -22,7 +22,7 @@ function App() {
             <Route path="scan" element={<ScannerPage />} />
             <Route path="results" element={<ResultsPage />} />
             <Route path="company" element={<CompanyDashboard />} />
-            <Route path="dashboard" element={<UserDashboard />} />
+            <Route path="customer" element={<UserDashboard />} />
             <Route path="leaderboard" element={<LeaderboardPage />} />
             <Route path="impact" element={<ImpactPage />} />
           </Route>

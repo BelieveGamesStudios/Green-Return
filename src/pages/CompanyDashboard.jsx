@@ -294,7 +294,7 @@ const CompanyDashboard = () => {
                         <GlassButton type="submit" className="w-full">Sign In</GlassButton>
                     </form>
                     <div className="text-center">
-                        <a href="/dashboard" className="text-sm text-forest-600 hover:text-forest-900 underline">
+                        <a href="/customer" className="text-sm text-forest-600 hover:text-forest-900 underline">
                             Are you a customer? Sign in here
                         </a>
                     </div>
