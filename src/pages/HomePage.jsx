@@ -84,10 +84,10 @@ const HomePage = () => {
             {/* Scanner Section */}
             <section className="pt-4">
                 <div className="text-center space-y-2 mb-6">
-                    <h1 className="text-4xl font-bold bg-gradient-to-r from-forest-600 to-forest-800 bg-clip-text text-transparent">
+                    <h1 className="text-4xl font-bold text-white">
                         Green Return
                     </h1>
-                    <p className="text-forest-800/70">
+                    <p className="text-white/70">
                         Scan a bottle to start earning rewards
                     </p>
                 </div>
@@ -98,8 +98,8 @@ const HomePage = () => {
             {/* Trending Campaigns */}
             <section>
                 <div className="flex items-center gap-2 mb-4 px-2">
-                    <TrendingUp className="text-forest-600" size={24} />
-                    <h3 className="text-lg font-semibold text-forest-900">Trending Campaigns</h3>
+                    <TrendingUp className="text-white" size={24} />
+                    <h3 className="text-lg font-semibold text-white">Trending Campaigns</h3>
                 </div>
                 <div className="space-y-3">
                     {trendingCampaigns.map((campaign) => (
@@ -108,13 +108,13 @@ const HomePage = () => {
                                 {campaign.image ? (
                                     <img src={campaign.image} alt={campaign.name} className="w-16 h-16 rounded-lg object-cover bg-white" />
                                 ) : (
-                                    <div className="w-16 h-16 rounded-lg bg-forest-100 flex items-center justify-center">
-                                        <TrendingUp className="text-forest-600" size={24} />
+                                    <div className="w-16 h-16 rounded-lg bg-white/10 flex items-center justify-center">
+                                        <TrendingUp className="text-white" size={24} />
                                     </div>
                                 )}
                                 <div className="flex-grow">
-                                    <h4 className="font-bold text-forest-600 text-lg">{campaign.name}</h4>
-                                    <p className="text-sm text-forest-500 font-medium">
+                                    <h4 className="font-bold text-white text-lg">{campaign.name}</h4>
+                                    <p className="text-sm text-forest-200 font-medium">
                                         {campaign.bottles && campaign.bottles.length > 0
                                             ? campaign.bottles.join(', ')
                                             : 'Multiple bottles'}
@@ -122,7 +122,7 @@ const HomePage = () => {
                                 </div>
                                 <div className="text-right">
                                     <p className="text-2xl font-black text-amber-500">{campaign.reward_amount}</p>
-                                    <p className="text-xs text-forest-500 font-semibold">points</p>
+                                    <p className="text-xs text-white font-semibold">points</p>
                                 </div>
                             </div>
                         </GlassCard>
@@ -139,7 +139,7 @@ const HomePage = () => {
             <section>
                 <div className="flex items-center gap-2 mb-4 px-2">
                     <Trophy className="text-amber-600" size={24} />
-                    <h3 className="text-lg font-semibold text-forest-900">Highest Paying Bottles</h3>
+                    <h3 className="text-lg font-semibold text-white">Highest Paying Bottles</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {topBottles.map((bottle, index) => (
@@ -148,8 +148,8 @@ const HomePage = () => {
                                 #{index + 1}
                             </div>
                             <div className="flex-grow">
-                                <h4 className="font-bold text-forest-600 text-base">{bottle.name}</h4>
-                                <p className="text-sm text-forest-500 font-medium">{bottle.size}</p>
+                                <h4 className="font-bold text-white text-base">{bottle.name}</h4>
+                                <p className="text-sm text-forest-200 font-medium">{bottle.size}</p>
                             </div>
                             <div className="flex items-center gap-1 text-amber-500 font-bold">
                                 <DollarSign size={16} />
@@ -158,7 +158,7 @@ const HomePage = () => {
                         </GlassCard>
                     ))}
                     {topBottles.length === 0 && (
-                        <div className="col-span-2 text-center py-8 text-forest-500 font-medium">
+                        <div className="col-span-2 text-center py-8 text-forest-200 font-medium">
                             <p>No bottles registered yet</p>
                         </div>
                     )}
@@ -178,17 +178,17 @@ const HomePage = () => {
                             <GlassCard className="max-w-md w-full p-8 space-y-6">
                                 <button
                                     onClick={() => setShowAuthModal(false)}
-                                    className="absolute top-4 right-4 text-forest-600 hover:text-forest-900"
+                                    className="absolute top-4 right-4 text-white hover:text-white/70"
                                 >
                                     <X size={24} />
                                 </button>
 
                                 <div className="text-center space-y-2">
-                                    <h2 className="text-2xl font-bold text-forest-900">Great Find!</h2>
-                                    <p className="text-forest-700">
-                                        We detected <span className="font-bold text-forest-900">{scannedBottle}</span>
+                                    <h2 className="text-2xl font-bold text-white">Great Find!</h2>
+                                    <p className="text-white/80">
+                                        We detected <span className="font-bold text-white">{scannedBottle}</span>
                                     </p>
-                                    <p className="text-sm text-forest-600">
+                                    <p className="text-sm text-white/60">
                                         Sign in or create an account to claim your rewards
                                     </p>
                                 </div>
@@ -204,8 +204,7 @@ const HomePage = () => {
 
                                 <div className="text-center">
                                     <button
-                                        onClick={() => setShowAuthModal(false)}
-                                        className="text-sm text-forest-600 hover:text-forest-900 underline"
+                                        className="text-sm text-white hover:text-forest-200 underline"
                                     >
                                         Continue without account
                                     </button>

@@ -54,7 +54,7 @@ const ScannerPage = () => {
             <BottleScanner onScanComplete={handleScanComplete} />
 
             <GlassCard className="p-4 mt-8 bg-amber-500/10 border-amber-500/20">
-                <p className="text-sm text-center text-forest-800">
+                <p className="text-sm text-center text-white">
                     <span className="font-bold text-amber-600">Tip:</span> Ensure good lighting and hold the camera steady for best results.
                 </p>
             </GlassCard>

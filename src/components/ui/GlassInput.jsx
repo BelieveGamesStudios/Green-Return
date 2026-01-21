@@ -24,7 +24,7 @@ const GlassInput = ({ label, error, icon, className = '', id, ...props }) => {
             peer w-full bg-white/5 backdrop-blur-md
             border border-white/10
             rounded-xl py-3 px-4
-            text-forest-950 dark:text-white 
+            text-white 
             placeholder-transparent
             outline-none
             transition-all duration-300
@@ -40,7 +40,7 @@ const GlassInput = ({ label, error, icon, className = '', id, ...props }) => {
                     htmlFor={id}
                     className={`
             absolute left-4 top-3 
-            text-white/50 text-base
+            text-white/70 text-base
             pointer-events-none
             transition-all duration-300
             peer-focus:-top-6 peer-focus:text-xs peer-focus:text-forest-400

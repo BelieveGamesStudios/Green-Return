@@ -51,8 +51,8 @@ const BottlesManager = ({ companyId }) => {
     return (
         <div className="space-y-6">
             <GlassCard className="p-6">
-                <h3 className="text-lg font-bold text-forest-900 mb-4 flex items-center gap-2">
-                    <Plus size={20} className="text-forest-500" />
+                <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                    <Plus size={20} className="text-forest-300" />
                     Register New Bottle
                 </h3>
                 <form onSubmit={handleAddBottle} className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -65,7 +65,7 @@ const BottlesManager = ({ companyId }) => {
                             placeholder="e.g. COCA-COLA|COKE"
                             required
                         />
-                        <p className="text-xs text-forest-500 mt-1">Use | to separate keywords. Text found on the bottle label.</p>
+                        <p className="text-xs text-forest-300 mt-1">Use | to separate keywords. Text found on the bottle label.</p>
                     </div>
                     <div className="md:col-span-2">
                         <GlassButton type="submit" className="w-full">Add Bottle to Database</GlassButton>
@@ -77,8 +77,8 @@ const BottlesManager = ({ companyId }) => {
                 {bottles.map((b) => (
                     <GlassCard key={b.id} className="p-4 flex justify-between items-center">
                         <div>
-                            <h4 className="font-bold text-forest-900">{b.name}</h4>
-                            <p className="text-sm text-forest-600">{b.size} • Pattern: {b.barcode_pattern}</p>
+                            <h4 className="font-bold text-white">{b.name}</h4>
+                            <p className="text-sm text-forest-200">{b.size} • Pattern: {b.barcode_pattern}</p>
                         </div>
                         <div className="text-xs bg-forest-100 text-forest-600 px-2 py-1 rounded-full">Active</div>
                     </GlassCard>
@@ -285,8 +285,8 @@ const CompanyDashboard = () => {
             <div className="flex items-center justify-center min-h-[60vh]">
                 <GlassCard className="max-w-md w-full p-8 space-y-6">
                     <div className="text-center space-y-2">
-                        <h1 className="text-2xl font-bold text-forest-900">Partner Login</h1>
-                        <p className="text-forest-700">Access your impact dashboard</p>
+                        <h1 className="text-2xl font-bold text-white">Partner Login</h1>
+                        <p className="text-forest-200">Access your impact dashboard</p>
                     </div>
                     <form onSubmit={handleLogin} className="space-y-4">
                         <GlassInput label="Email" type="email" placeholder="company@example.com" required />
@@ -294,12 +294,12 @@ const CompanyDashboard = () => {
                         <GlassButton type="submit" className="w-full">Sign In</GlassButton>
                     </form>
                     <div className="text-center">
-                        <a href="/customer" className="text-sm text-forest-600 hover:text-forest-900 underline">
+                        <a href="/customer" className="text-sm text-forest-200 hover:text-white underline">
                             Are you a customer? Sign in here
                         </a>
                     </div>
-                </GlassCard>
-            </div>
+                </GlassCard >
+            </div >
         );
     }
 
@@ -350,19 +350,19 @@ const CompanyDashboard = () => {
                     {activeTab === 'analytics' && (
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <GlassCard className="p-6">
-                                <p className="text-sm font-bold text-forest-500 uppercase">Active Campaigns</p>
-                                <p className="text-4xl font-bold text-forest-900 mt-2">{campaigns.length}</p>
-                                <p className="text-xs text-forest-600 mt-1">Total campaigns running</p>
+                                <p className="text-sm font-bold text-forest-300 uppercase">Active Campaigns</p>
+                                <p className="text-4xl font-bold text-white mt-2">{campaigns.length}</p>
+                                <p className="text-xs text-forest-200 mt-1">Total campaigns running</p>
                             </GlassCard>
                             <GlassCard className="p-6">
                                 <p className="text-sm font-bold text-amber-500 uppercase">Bottles Registered</p>
-                                <p className="text-4xl font-bold text-forest-900 mt-2">24</p>
-                                <p className="text-xs text-forest-600 mt-1">In your catalog</p>
+                                <p className="text-4xl font-bold text-white mt-2">24</p>
+                                <p className="text-xs text-forest-200 mt-1">In your catalog</p>
                             </GlassCard>
                             <GlassCard className="p-6">
                                 <p className="text-sm font-bold text-blue-500 uppercase">Collection Points</p>
-                                <p className="text-4xl font-bold text-forest-900 mt-2">{locations.length}</p>
-                                <p className="text-xs text-forest-600 mt-1">Active locations</p>
+                                <p className="text-4xl font-bold text-white mt-2">{locations.length}</p>
+                                <p className="text-xs text-forest-200 mt-1">Active locations</p>
                             </GlassCard>
                         </div>
                     )}
@@ -370,14 +370,14 @@ const CompanyDashboard = () => {
                     {activeTab === 'campaigns' && (
                         <div className="space-y-6">
                             <GlassCard className="p-6">
-                                <h3 className="text-lg font-bold text-forest-900 mb-4 flex items-center gap-2">
-                                    <Plus size={20} className="text-forest-500" />
+                                <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                                    <Plus size={20} className="text-forest-300" />
                                     New Campaign & Bottle
                                 </h3>
                                 <form onSubmit={handleAddCampaign} className="space-y-4">
                                     {/* Image Upload Section */}
                                     <div className="border-2 border-dashed border-forest-200 rounded-xl p-6">
-                                        <label className="block text-sm font-medium text-forest-900 mb-2">
+                                        <label className="block text-sm font-medium text-white mb-2">
                                             Step 1: Upload Bottle Image
                                         </label>
                                         <div className="flex items-center gap-4">
@@ -397,7 +397,7 @@ const CompanyDashboard = () => {
                                                 {uploadedImage ? 'Change Image' : 'Upload Image'}
                                             </label>
                                             {isProcessingOCR && (
-                                                <div className="flex items-center gap-2 text-forest-600">
+                                                <div className="flex items-center gap-2 text-forest-300">
                                                     <Loader className="animate-spin" size={16} />
                                                     <span className="text-sm">Processing OCR...</span>
                                                 </div>
@@ -408,10 +408,10 @@ const CompanyDashboard = () => {
                                             <div className="mt-4 flex gap-4">
                                                 <img src={uploadedImage} alt="Uploaded bottle" className="w-32 h-32 object-cover rounded-lg border-2 border-forest-200" />
                                                 <div className="flex-grow">
-                                                    <p className="text-xs text-forest-600 mb-2">Extracted Information:</p>
-                                                    <div className="bg-forest-50 p-3 rounded-lg">
-                                                        <p className="text-sm font-medium text-forest-900">
-                                                            Bottle Name: <span className="text-forest-600">{extractedBottleName || 'Processing...'}</span>
+                                                    <p className="text-xs text-forest-300 mb-2">Extracted Information:</p>
+                                                    <div className="bg-forest-50/10 p-3 rounded-lg">
+                                                        <p className="text-sm font-medium text-white">
+                                                            Bottle Name: <span className="text-forest-300">{extractedBottleName || 'Processing...'}</span>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -475,11 +475,11 @@ const CompanyDashboard = () => {
                                         <div className="flex-grow">
                                             <div className="flex justify-between items-start">
                                                 <div>
-                                                    <h4 className="font-bold text-forest-900">{camp.name}</h4>
-                                                    <p className="text-xs text-forest-600">Bottles: {camp.bottles.join(', ')}</p>
+                                                    <h4 className="font-bold text-white">{camp.name}</h4>
+                                                    <p className="text-xs text-forest-200">Bottles: {camp.bottles.join(', ')}</p>
                                                 </div>
                                             </div>
-                                            <div className="flex gap-4 mt-2 text-sm text-forest-600">
+                                            <div className="flex gap-4 mt-2 text-sm text-forest-200">
                                                 <span className="flex items-center gap-1 font-bold text-amber-600">
                                                     <DollarSign size={14} /> {camp.reward_amount || camp.reward} pts
                                                 </span>
@@ -493,46 +493,48 @@ const CompanyDashboard = () => {
                                     </GlassCard>
                                 ))}
                             </div>
-                        </div>
+                        </div >
                     )}
 
-                    {activeTab === 'locations' && (
-                        <div className="space-y-6">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <GlassCard className="p-6 h-fit">
-                                    <h3 className="text-lg font-bold text-forest-900 mb-4">Add Collection Point</h3>
-                                    <div className="space-y-4">
-                                        <GlassInput label="Location Name" placeholder="Station Name" />
-                                        <GlassInput label="Address" placeholder="Full Address" />
-                                        <div className="h-32 bg-forest-50 rounded-xl border border-dotted border-forest-300 flex items-center justify-center text-forest-400">
-                                            Map Picker Placeholder
+                    {
+                        activeTab === 'locations' && (
+                            <div className="space-y-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <GlassCard className="p-6 h-fit">
+                                        <h3 className="text-lg font-bold text-white mb-4">Add Collection Point</h3>
+                                        <div className="space-y-4">
+                                            <GlassInput label="Location Name" placeholder="Station Name" />
+                                            <GlassInput label="Address" placeholder="Full Address" />
+                                            <div className="h-32 bg-forest-50 rounded-xl border border-dotted border-forest-300 flex items-center justify-center text-forest-400">
+                                                Map Picker Placeholder
+                                            </div>
+                                            <GlassButton>Add Location</GlassButton>
                                         </div>
-                                        <GlassButton>Add Location</GlassButton>
-                                    </div>
-                                </GlassCard>
-                                <div className="space-y-4">
-                                    {locations.map((loc) => (
-                                        <GlassCard key={loc.id} className="p-4">
-                                            <div className="flex items-start justify-between">
-                                                <div className="flex gap-3">
-                                                    <div className="w-10 h-10 rounded-full bg-forest-100 flex items-center justify-center text-forest-600 shrink-0">
-                                                        <MapPin size={20} />
-                                                    </div>
-                                                    <div>
-                                                        <h4 className="font-bold text-forest-900">{loc.name}</h4>
-                                                        <p className="text-sm text-forest-600">{loc.address}</p>
+                                    </GlassCard>
+                                    <div className="space-y-4">
+                                        {locations.map((loc) => (
+                                            <GlassCard key={loc.id} className="p-4">
+                                                <div className="flex items-start justify-between">
+                                                    <div className="flex gap-3">
+                                                        <div className="w-10 h-10 rounded-full bg-forest-100 flex items-center justify-center text-forest-600 shrink-0">
+                                                            <MapPin size={20} />
+                                                        </div>
+                                                        <div>
+                                                            <h4 className="font-bold text-white">{loc.name}</h4>
+                                                            <p className="text-sm text-forest-200">{loc.address}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </GlassCard>
-                                    ))}
+                                            </GlassCard>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )}
-                </motion.div>
-            </AnimatePresence>
-        </div>
+                        )
+                    }
+                </motion.div >
+            </AnimatePresence >
+        </div >
     );
 };
 

@@ -27,11 +27,11 @@ const LeaderboardPage = () => {
             <div className="flex items-center gap-4">
                 <button
                     onClick={() => navigate('/')}
-                    className="p-2 rounded-full bg-forest-100/10 hover:bg-forest-100/20 text-forest-900 transition-colors"
+                    className="p-2 rounded-full bg-forest-100/10 hover:bg-forest-100/20 text-forest-500 transition-colors"
                 >
                     <ArrowLeft size={24} />
                 </button>
-                <h1 className="text-2xl font-bold text-forest-900">Leaderboard</h1>
+                <h1 className="text-2xl font-bold text-forest-500">Leaderboard</h1>
             </div>
 
             {/* Toggle */}
@@ -40,7 +40,7 @@ const LeaderboardPage = () => {
                     <button
                         key={p}
                         onClick={() => setPeriod(p)}
-                        className={`flex-1 py-2 rounded-full text-sm font-bold transition-all ${period === p ? 'bg-forest-500 text-white shadow-lg' : 'text-forest-800 hover:bg-white/10'
+                        className={`flex-1 py-2 rounded-full text-sm font-bold transition-all ${period === p ? 'bg-forest-500 text-white shadow-lg' : 'text-forest-500 hover:bg-white/10'
                             }`}
                     >
                         {p === 'weekly' ? 'Weekly' : 'All Time'}
@@ -54,7 +54,7 @@ const LeaderboardPage = () => {
                 <div className="flex flex-col items-center gap-2">
                     <div className="text-2xl">{sortedUsers[1].avatar}</div>
                     <div className="w-20 h-24 bg-forest-300/30 rounded-t-2xl flex flex-col items-center justify-end p-2 border-t border-x border-white/20">
-                        <span className="font-bold text-forest-900">2</span>
+                        <span className="font-bold text-forest-600">2</span>
                     </div>
                 </div>
                 {/* 1st Place */}
@@ -62,14 +62,14 @@ const LeaderboardPage = () => {
                     <Crown className="text-amber-400 fill-amber-400 absolute -top-8 animate-bounce" size={24} />
                     <div className="text-4xl">{sortedUsers[0].avatar}</div>
                     <div className="w-24 h-32 bg-amber-400/30 rounded-t-2xl flex flex-col items-center justify-end p-2 border-t border-x border-amber-200/50 shadow-[0_0_30px_rgba(251,191,36,0.2)]">
-                        <span className="font-bold text-forest-900 text-xl">1</span>
+                        <span className="font-bold text-forest-600 text-xl">1</span>
                     </div>
                 </div>
                 {/* 3rd Place */}
                 <div className="flex flex-col items-center gap-2">
                     <div className="text-2xl">{sortedUsers[2].avatar}</div>
                     <div className="w-20 h-20 bg-forest-800/20 rounded-t-2xl flex flex-col items-center justify-end p-2 border-t border-x border-white/10">
-                        <span className="font-bold text-forest-900">3</span>
+                        <span className="font-bold text-forest-600">3</span>
                     </div>
                 </div>
             </div>
@@ -93,15 +93,15 @@ const LeaderboardPage = () => {
                             </span>
                             <span className="text-2xl">{u.avatar}</span>
                             <div>
-                                <p className={`font-bold ${u.isUser ? 'text-amber-700' : 'text-forest-900'}`}>
+                                <p className={`font-bold ${u.isUser ? 'text-amber-300' : 'text-forest-200'}`}>
                                     {u.name}
                                 </p>
-                                {u.isUser && <p className="text-xs text-amber-600 font-medium">That's you!</p>}
+                                {u.isUser && <p className="text-xs text-amber-400 font-medium">That's you!</p>}
                             </div>
                         </div>
                         <div className="text-right">
-                            <p className="font-bold text-forest-900">{u.points}</p>
-                            <p className="text-xs text-forest-600">pts</p>
+                            <p className="font-bold text-forest-200">{u.points}</p>
+                            <p className="text-xs text-forest-300">pts</p>
                         </div>
                     </GlassCard>
                 ))}
