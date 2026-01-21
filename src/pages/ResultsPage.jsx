@@ -61,10 +61,10 @@ const ResultsPage = () => {
             {/* Header */}
             {!claimed && (
                 <div className="flex items-center gap-4 mb-4">
-                    <button onClick={() => navigate('/scan')} className="p-2 rounded-full bg-forest-100/10 hover:bg-forest-100/20 text-forest-900 transition-colors">
+                    <button onClick={() => navigate('/scan')} className="p-2 rounded-full bg-forest-100/10 hover:bg-forest-100/20 text-white transition-colors">
                         <ArrowLeft size={24} />
                     </button>
-                    <h1 className="text-2xl font-bold text-forest-900">Confirm Recycling</h1>
+                    <h1 className="text-2xl font-bold text-white">Confirm Recycling</h1>
                 </div>
             )}
 
@@ -78,14 +78,14 @@ const ResultsPage = () => {
                 >
                     {claimed ? <Coins size={48} /> : <CheckCircle size={48} />}
                 </motion.div>
-                <h2 className="text-3xl font-bold text-forest-900">{claimed ? 'Points Added!' : 'Bottle Identified'}</h2>
-                <p className="text-forest-700 text-lg">{brand}</p>
+                <h2 className="text-3xl font-bold text-white">{claimed ? 'Points Added!' : 'Bottle Identified'}</h2>
+                <p className="text-white/90 text-lg">{brand}</p>
             </div>
 
             {/* Quantity Selector (Only if not claimed) */}
             {!claimed ? (
                 <GlassCard className="p-6">
-                    <p className="text-center text-forest-900 font-medium mb-4">How many bottles?</p>
+                    <p className="text-center text-white font-medium mb-4">How many bottles?</p>
                     <div className="flex items-center justify-center gap-6">
                         <GlassButton
                             variant="secondary"
@@ -94,7 +94,7 @@ const ResultsPage = () => {
                         >
                             <Minus size={20} />
                         </GlassButton>
-                        <span className="text-4xl font-bold text-forest-900 w-16 text-center">{quantity}</span>
+                        <span className="text-4xl font-bold text-white w-16 text-center">{quantity}</span>
                         <GlassButton
                             variant="secondary"
                             className="w-12 h-12 rounded-full !p-0 flex items-center justify-center"
@@ -105,7 +105,7 @@ const ResultsPage = () => {
                     </div>
 
                     <div className="mt-8 pt-6 border-t border-forest-100/20 flex justify-between items-center">
-                        <span className="text-forest-900 font-medium">Potential Earnings</span>
+                        <span className="text-white font-medium">Potential Earnings</span>
                         <div className="flex items-center gap-2 text-2xl font-bold text-amber-600">
                             <Coins className="fill-amber-400 stroke-amber-600" size={24} />
                             +{totalReward}

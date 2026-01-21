@@ -37,7 +37,7 @@ const ImpactPage = () => {
 
     return (
         <div className="max-w-lg mx-auto md:max-w-2xl px-4 py-8 pb-24 space-y-8">
-            <h1 className="text-3xl font-bold text-forest-900 text-center">Your Impact</h1>
+            <h1 className="text-3xl font-bold text-white text-center">Your Impact</h1>
 
             {/* Impact Stats */}
             <div className="grid grid-cols-1 gap-4">
@@ -47,14 +47,14 @@ const ImpactPage = () => {
                             <Wind size={24} />
                         </div>
                         <div>
-                            <p className="text-sm text-forest-600 font-medium">CO2 Saved</p>
-                            <p className="text-2xl font-bold text-forest-900">{user.impact.co2Saved.toFixed(1)} kg</p>
+                            <p className="text-sm text-white font-medium">CO2 Saved</p>
+                            <p className="text-2xl font-bold text-white">{user.impact.co2Saved.toFixed(1)} kg</p>
                         </div>
                     </div>
                     <div className="w-full bg-forest-100 rounded-full h-2">
                         <div className="bg-forest-500 h-2 rounded-full" style={{ width: `${Math.min(user.impact.co2Saved * 10, 100)}%` }} />
                     </div>
-                    <p className="text-xs text-forest-500 mt-2 text-right">Goal: 10kg</p>
+                    <p className="text-xs text-white/80 mt-2 text-right">Goal: 10kg</p>
                 </GlassCard>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -62,8 +62,8 @@ const ImpactPage = () => {
                         <div className="flex flex-col items-center text-center gap-2">
                             <TreeDeciduous className="text-green-600" size={32} />
                             <div>
-                                <p className="text-2xl font-bold text-forest-900">{user.impact.treesPlanted.toFixed(1)}</p>
-                                <p className="text-xs text-forest-600">Trees Planted</p>
+                                <p className="text-2xl font-bold text-white">{user.impact.treesPlanted.toFixed(1)}</p>
+                                <p className="text-xs text-white">Trees Planted</p>
                             </div>
                         </div>
                     </GlassCard>
@@ -71,8 +71,8 @@ const ImpactPage = () => {
                         <div className="flex flex-col items-center text-center gap-2">
                             <Droplets className="text-blue-500" size={32} />
                             <div>
-                                <p className="text-2xl font-bold text-forest-900">{user.impact.oceanPlastic}g</p>
-                                <p className="text-xs text-forest-600">Plastic Saved</p>
+                                <p className="text-2xl font-bold text-white">{user.impact.oceanPlastic}g</p>
+                                <p className="text-xs text-white">Plastic Saved</p>
                             </div>
                         </div>
                     </GlassCard>
@@ -87,7 +87,7 @@ const ImpactPage = () => {
 
             {/* Badges */}
             <section>
-                <h2 className="text-xl font-bold text-forest-900 mb-4 flex items-center gap-2">
+                <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                     <Medal className="text-amber-500" />
                     Achievements
                 </h2>
@@ -108,8 +108,8 @@ const ImpactPage = () => {
                                     )}
                                 </div>
                                 <div>
-                                    <p className="font-bold text-forest-900 text-xs">{badge.name}</p>
-                                    <p className="text-[10px] text-forest-600 leading-tight mt-1">{badge.desc}</p>
+                                    <p className="font-bold text-white text-xs">{badge.name}</p>
+                                    <p className="text-[10px] text-white/80 leading-tight mt-1">{badge.desc}</p>
                                 </div>
                             </GlassCard>
                         );
