@@ -14,7 +14,7 @@ export const COMMON_BRANDS = [
  * @param {string} text - Raw OCR text
  * @returns {Object} result - { rawText: string, identifiedBrand: string | null, confidence: string }
  */
-export const extractBottleInfo = (text) => {
+export const extractBottleInfo = (text, knownBrands = COMMON_BRANDS) => {
     if (!text) return { rawText: '', identifiedBrand: null };
 
     // 1. Basic cleaning: remove excessive whitespace and non-alphanumeric chars (keep basic punctuation)
@@ -27,17 +27,16 @@ export const extractBottleInfo = (text) => {
     let bestMatch = null;
     const lowerText = cleanText.toLowerCase();
 
-    for (const brand of COMMON_BRANDS) {
+    // Prioritize dynamic known brands if provided, else fallback to common
+    const targets = knownBrands.length > 0 ? knownBrands : COMMON_BRANDS;
+
+    for (const brand of targets) {
         if (lowerText.includes(brand.toLowerCase())) {
             // Simple inclusion check. Could be promoted to fuzzy matching if needed.
             bestMatch = brand;
             break; // Return first match for now (heuristically usually the most prominent)
         }
     }
-
-    // 3. Fallback: If no brand found, maybe return the longest word or first capitalized line? 
-    // For now, we just return null if no known brand found, 
-    // letting the UI ask the user to confirm or edit.
 
     return {
         rawText: cleanText,
