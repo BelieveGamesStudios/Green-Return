@@ -26,10 +26,10 @@ const GlassButton = ({
     const baseStyles = "relative overflow-hidden rounded-xl bg-opacity-80 backdrop-blur-md shadow-glass transition-all duration-300 flex items-center justify-center gap-2 font-medium bg-gradient-to-br";
 
     const variants = {
-        primary: "bg-forest-500/90 text-white hover:bg-forest-400 border border-forest-400/30 shadow-forest-500/20",
-        secondary: "bg-white/10 text-forest-900 dark:text-white hover:bg-white/20 border border-white/20 hover:border-white/40",
-        danger: "bg-red-500/80 text-white hover:bg-red-400 border border-red-500/30",
-        ghost: "bg-transparent shadow-none hover:bg-white/10 dark:hover:bg-black/10 border border-transparent",
+        primary: "bg-forest-600 text-white hover:bg-forest-700 border-2 border-forest-700 shadow-lg",
+        secondary: "bg-gray-200 text-gray-900 hover:bg-gray-300 border-2 border-gray-400",
+        danger: "bg-red-600 text-white hover:bg-red-700 border-2 border-red-700",
+        ghost: "bg-transparent shadow-none hover:bg-gray-200 border-2 border-gray-300 text-gray-900",
     };
 
     const sizes = {

@@ -12,9 +12,9 @@ const GlassCard = ({ children, className = '', hoverEffect = false, ...props }) 
         <motion.div
             className={`
         relative overflow-hidden rounded-3xl
-        bg-white/10 dark:bg-black/20
-        backdrop-blur-xl border border-white/20
-        shadow-glass
+        bg-white/80 dark:bg-gray-800/90
+        backdrop-blur-xl border-2 border-gray-300/50
+        shadow-glass-lg
         ${className}
       `}
             whileHover={hoverEffect ? { scale: 1.02, y: -5 } : {}}

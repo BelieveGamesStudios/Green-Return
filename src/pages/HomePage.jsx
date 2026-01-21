@@ -1,137 +1,220 @@
-import { motion } from 'framer-motion';
-import { Camera, RefreshCw, Coins, ArrowRight, History, Flame } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { TrendingUp, Trophy, DollarSign, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import GlassCard from '../components/ui/GlassCard';
 import GlassButton from '../components/ui/GlassButton';
+import BottleScanner from '../components/scanner/BottleScanner';
 import { useStore } from '../lib/store';
+import { supabase } from '../lib/supabase';
+import toast from 'react-hot-toast';
 
 const HomePage = () => {
     const navigate = useNavigate();
     const { user } = useStore();
+    const [scannedBottle, setScannedBottle] = useState(null);
+    const [showAuthModal, setShowAuthModal] = useState(false);
+    const [trendingCampaigns, setTrendingCampaigns] = useState([]);
+    const [topBottles, setTopBottles] = useState([]);
 
-    // Stats from store
-    const stats = {
-        todayScans: user.bottlesScanned, // Using total instead of today for now (simplification)
-        availableRewards: user.totalPoints,
+    // Fetch trending campaigns and top bottles
+    useEffect(() => {
+        fetchLeaderboards();
+    }, []);
+
+    const fetchLeaderboards = async () => {
+        try {
+            // Fetch campaigns ordered by reward
+            const { data: campaigns } = await supabase
+                .from('campaigns')
+                .select('*')
+                .eq('status', 'Active')
+                .order('reward_amount', { ascending: false })
+                .limit(5);
+
+            if (campaigns) {
+                const parsed = campaigns.map(c => {
+                    let details = { bottles: [], image: null };
+                    try {
+                        if (c.description && c.description.startsWith('{')) {
+                            details = JSON.parse(c.description);
+                        }
+                    } catch (e) { }
+                    return { ...c, ...details };
+                });
+                setTrendingCampaigns(parsed);
+            }
+
+            // Fetch top bottles (mock for now, would need analytics in real app)
+            const { data: bottles } = await supabase
+                .from('bottles')
+                .select('*')
+                .order('created_at', { ascending: false })
+                .limit(5);
+
+            if (bottles) setTopBottles(bottles);
+        } catch (err) {
+            console.error('Error fetching leaderboards:', err);
+        }
     };
 
-    const recentScans = [
-        { id: 1, name: 'Cola Zero', points: 10, time: '2h ago' },
-        { id: 2, name: 'Water Bottle', points: 5, time: '4h ago' },
-        { id: 3, name: 'Iced Tea', points: 8, time: '1d ago' },
-    ];
+    const handleScanComplete = (bottleName) => {
+        setScannedBottle(bottleName);
+
+        // Check if user is authenticated
+        if (!user || user.totalPoints === undefined) {
+            // Show auth modal
+            setShowAuthModal(true);
+        } else {
+            // Proceed to results
+            navigate('/results', { state: { brand: bottleName } });
+        }
+    };
+
+    const handleSignIn = () => {
+        navigate('/customer');
+    };
+
+    const handleSignUp = () => {
+        navigate('/customer');
+    };
 
     return (
         <div className="flex flex-col gap-8 pb-20 max-w-lg mx-auto md:max-w-2xl lg:max-w-4xl">
-            {/* Hero Section */}
-            <section className="text-center space-y-6 pt-8">
-                <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                    className="relative w-32 h-32 mx-auto bg-forest-100/10 rounded-full flex items-center justify-center border border-forest-200/20 shadow-glass-lg"
-                >
-                    <motion.div
-                        animate={{ rotate: 10 }}
-                        transition={{ repeat: Infinity, repeatType: "reverse", duration: 2 }}
-                    >
-                        <RefreshCw size={64} className="text-forest-500" />
-                    </motion.div>
-                </motion.div>
-
-                <div className="space-y-2">
+            {/* Scanner Section */}
+            <section className="pt-4">
+                <div className="text-center space-y-2 mb-6">
                     <h1 className="text-4xl font-bold bg-gradient-to-r from-forest-600 to-forest-800 bg-clip-text text-transparent">
                         Green Return
                     </h1>
-
-                    {/* Streak Counter */}
-                    <div className="flex items-center justify-center gap-1 text-orange-500 font-bold">
-                        <motion.div
-                            animate={{ scale: [1, 1.2, 1] }}
-                            transition={{ repeat: Infinity, duration: 2 }}
-                        >
-                            <Flame size={20} className="fill-orange-500" />
-                        </motion.div>
-                        <span>{user.streak} Day Streak</span>
-                    </div>
-
-                    <p className="text-forest-800/70 text-lg">
-                        Recycle bottles, earn rewards, save the planet.
+                    <p className="text-forest-800/70">
+                        Scan a bottle to start earning rewards
                     </p>
                 </div>
 
-                <GlassButton
-                    onClick={() => navigate('/scan')}
-                    className="px-8 py-4 text-xl font-bold w-full md:w-auto shadow-xl shadow-forest-500/20"
-                >
-                    <div className="flex items-center gap-3">
-                        <Camera size={24} />
-                        Scan a Bottle
-                    </div>
-                </GlassButton>
+                <BottleScanner onScanComplete={handleScanComplete} />
             </section>
 
-            {/* Stats Section */}
-            <section className="grid grid-cols-2 gap-4">
-                <GlassCard className="p-6 text-center space-y-1">
-                    <p className="text-forest-900/60 text-sm font-medium">Total Bottles</p>
-                    <p className="text-3xl font-bold text-forest-700">{user.bottlesScanned}</p>
-                </GlassCard>
-                <GlassCard className="p-6 text-center space-y-1">
-                    <p className="text-forest-900/60 text-sm font-medium">Total Points</p>
-                    <div className="flex items-center justify-center gap-1 text-3xl font-bold text-amber-600">
-                        <Coins size={24} className="fill-amber-400 stroke-amber-600" />
-                        {user.totalPoints}
-                    </div>
-                </GlassCard>
-            </section>
-
-            {/* How It Works */}
+            {/* Trending Campaigns */}
             <section>
-                <h3 className="text-lg font-semibold text-forest-900 mb-4 px-2">How it works</h3>
-                <div className="grid gap-4 md:grid-cols-3">
-                    {[
-                        { icon: Camera, title: "Scan", desc: "Scan the bottle label" },
-                        { icon: RefreshCw, title: "Recycle", desc: "Drop it at a collection point" },
-                        { icon: Coins, title: "Earn", desc: "Get rewards instantly" }
-                    ].map((step, idx) => (
-                        <GlassCard key={idx} className="p-4 flex items-center gap-4 md:flex-col md:text-center md:py-6">
-                            <div className="w-10 h-10 rounded-full bg-forest-100 flex items-center justify-center text-forest-600 shrink-0">
-                                <step.icon size={20} />
-                            </div>
-                            <div>
-                                <h4 className="font-bold text-forest-900">{step.title}</h4>
-                                <p className="text-sm text-forest-700/70">{step.desc}</p>
+                <div className="flex items-center gap-2 mb-4 px-2">
+                    <TrendingUp className="text-forest-600" size={24} />
+                    <h3 className="text-lg font-semibold text-forest-900">Trending Campaigns</h3>
+                </div>
+                <div className="space-y-3">
+                    {trendingCampaigns.map((campaign) => (
+                        <GlassCard key={campaign.id} className="p-4">
+                            <div className="flex items-center gap-4">
+                                {campaign.image ? (
+                                    <img src={campaign.image} alt={campaign.name} className="w-16 h-16 rounded-lg object-cover bg-white" />
+                                ) : (
+                                    <div className="w-16 h-16 rounded-lg bg-forest-100 flex items-center justify-center">
+                                        <TrendingUp className="text-forest-600" size={24} />
+                                    </div>
+                                )}
+                                <div className="flex-grow">
+                                    <h4 className="font-bold text-forest-600 text-lg">{campaign.name}</h4>
+                                    <p className="text-sm text-forest-500 font-medium">
+                                        {campaign.bottles && campaign.bottles.length > 0
+                                            ? campaign.bottles.join(', ')
+                                            : 'Multiple bottles'}
+                                    </p>
+                                </div>
+                                <div className="text-right">
+                                    <p className="text-2xl font-black text-amber-500">{campaign.reward_amount}</p>
+                                    <p className="text-xs text-forest-500 font-semibold">points</p>
+                                </div>
                             </div>
                         </GlassCard>
                     ))}
+                    {trendingCampaigns.length === 0 && (
+                        <div className="text-center py-8 text-forest-500 font-medium">
+                            <p>No campaigns available yet</p>
+                        </div>
+                    )}
                 </div>
             </section>
 
-            {/* Recent Scans (Carousel-like) */}
+            {/* Highest Paying Bottles */}
             <section>
-                <div className="flex items-center justify-between mb-4 px-2">
-                    <h3 className="text-lg font-semibold text-forest-900">Recent Scans</h3>
-                    <GlassButton variant="secondary" className="!px-3 !py-1 text-xs">View All</GlassButton>
+                <div className="flex items-center gap-2 mb-4 px-2">
+                    <Trophy className="text-amber-600" size={24} />
+                    <h3 className="text-lg font-semibold text-forest-900">Highest Paying Bottles</h3>
                 </div>
-                <div className="flex gap-4 overflow-x-auto pb-4 px-2 snap-x">
-                    {recentScans.map((scan) => (
-                        <GlassCard key={scan.id} className="min-w-[140px] p-4 flex flex-col gap-2 snap-start">
-                            <div className="w-10 h-10 rounded-xl bg-forest-50 border border-forest-100 flex items-center justify-center text-forest-400 mb-2">
-                                <History size={20} />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {topBottles.map((bottle, index) => (
+                        <GlassCard key={bottle.id} className="p-4 flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-white font-bold text-sm shrink-0">
+                                #{index + 1}
                             </div>
-                            <div>
-                                <p className="font-bold text-forest-900 text-sm truncate">{scan.name}</p>
-                                <p className="text-xs text-forest-500">{scan.time}</p>
+                            <div className="flex-grow">
+                                <h4 className="font-bold text-forest-600 text-base">{bottle.name}</h4>
+                                <p className="text-sm text-forest-500 font-medium">{bottle.size}</p>
                             </div>
-                            <div className="mt-auto pt-2 flex items-center gap-1 text-xs font-bold text-amber-600">
-                                <Coins size={12} className="fill-amber-400" />
-                                +{scan.points}
+                            <div className="flex items-center gap-1 text-amber-500 font-bold">
+                                <DollarSign size={16} />
+                                <span>50pts</span>
                             </div>
                         </GlassCard>
                     ))}
+                    {topBottles.length === 0 && (
+                        <div className="col-span-2 text-center py-8 text-forest-500 font-medium">
+                            <p>No bottles registered yet</p>
+                        </div>
+                    )}
                 </div>
             </section>
+
+            {/* Auth Modal */}
+            <AnimatePresence>
+                {showAuthModal && (
+                    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            className="relative"
+                        >
+                            <GlassCard className="max-w-md w-full p-8 space-y-6">
+                                <button
+                                    onClick={() => setShowAuthModal(false)}
+                                    className="absolute top-4 right-4 text-forest-600 hover:text-forest-900"
+                                >
+                                    <X size={24} />
+                                </button>
+
+                                <div className="text-center space-y-2">
+                                    <h2 className="text-2xl font-bold text-forest-900">Great Find!</h2>
+                                    <p className="text-forest-700">
+                                        We detected <span className="font-bold text-forest-900">{scannedBottle}</span>
+                                    </p>
+                                    <p className="text-sm text-forest-600">
+                                        Sign in or create an account to claim your rewards
+                                    </p>
+                                </div>
+
+                                <div className="space-y-3">
+                                    <GlassButton onClick={handleSignIn} className="w-full py-3">
+                                        Sign In
+                                    </GlassButton>
+                                    <GlassButton onClick={handleSignUp} variant="secondary" className="w-full py-3">
+                                        Create Account
+                                    </GlassButton>
+                                </div>
+
+                                <div className="text-center">
+                                    <button
+                                        onClick={() => setShowAuthModal(false)}
+                                        className="text-sm text-forest-600 hover:text-forest-900 underline"
+                                    >
+                                        Continue without account
+                                    </button>
+                                </div>
+                            </GlassCard>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };
