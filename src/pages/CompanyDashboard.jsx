@@ -52,7 +52,7 @@ const BottlesManager = ({ companyId }) => {
         <div className="space-y-6">
             <GlassCard className="p-6">
                 <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                    <Plus size={20} className="text-forest-300" />
+                    <Plus size={20} className="text-white" />
                     Register New Bottle
                 </h3>
                 <form onSubmit={handleAddBottle} className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -65,7 +65,7 @@ const BottlesManager = ({ companyId }) => {
                             placeholder="e.g. COCA-COLA|COKE"
                             required
                         />
-                        <p className="text-xs text-forest-300 mt-1">Use | to separate keywords. Text found on the bottle label.</p>
+                        <p className="text-xs text-white/80 mt-1">Use | to separate keywords. Text found on the bottle label.</p>
                     </div>
                     <div className="md:col-span-2">
                         <GlassButton type="submit" className="w-full">Add Bottle to Database</GlassButton>
@@ -78,7 +78,7 @@ const BottlesManager = ({ companyId }) => {
                     <GlassCard key={b.id} className="p-4 flex justify-between items-center">
                         <div>
                             <h4 className="font-bold text-white">{b.name}</h4>
-                            <p className="text-sm text-forest-200">{b.size} • Pattern: {b.barcode_pattern}</p>
+                            <p className="text-sm text-white/80">{b.size} • Pattern: {b.barcode_pattern}</p>
                         </div>
                         <div className="text-xs bg-forest-100 text-forest-600 px-2 py-1 rounded-full">Active</div>
                     </GlassCard>
@@ -286,7 +286,7 @@ const CompanyDashboard = () => {
                 <GlassCard className="max-w-md w-full p-8 space-y-6">
                     <div className="text-center space-y-2">
                         <h1 className="text-2xl font-bold text-white">Partner Login</h1>
-                        <p className="text-forest-200">Access your impact dashboard</p>
+                        <p className="text-gray-300">Access your impact dashboard</p>
                     </div>
                     <form onSubmit={handleLogin} className="space-y-4">
                         <GlassInput label="Email" type="email" placeholder="company@example.com" required />
@@ -294,7 +294,7 @@ const CompanyDashboard = () => {
                         <GlassButton type="submit" className="w-full">Sign In</GlassButton>
                     </form>
                     <div className="text-center">
-                        <a href="/customer" className="text-sm text-forest-200 hover:text-white underline">
+                        <a href="/customer" className="text-sm text-gray-300 hover:text-white underline">
                             Are you a customer? Sign in here
                         </a>
                     </div>
@@ -307,8 +307,8 @@ const CompanyDashboard = () => {
         <div className="max-w-4xl mx-auto pb-20">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                 <div>
-                    <h1 className="text-3xl font-bold text-forest-900">Partner Dashboard</h1>
-                    <p className="text-forest-700">Manage your recycling campaigns & bottles</p>
+                    <h1 className="text-3xl font-bold text-white">Partner Dashboard</h1>
+                    <p className="text-white/80">Manage your recycling campaigns & bottles</p>
                 </div>
                 <div className="flex gap-2">
                     <GlassButton variant="secondary" size="sm" icon={<LogOut size={16} />} onClick={() => setIsAuthenticated(false)}>
@@ -329,7 +329,7 @@ const CompanyDashboard = () => {
                             onClick={() => setActiveTab(tab.id)}
                             className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all ${activeTab === tab.id
                                 ? 'bg-forest-600 text-white shadow-lg shadow-forest-500/30'
-                                : 'bg-white/10 text-forest-800 hover:bg-white/20 hover:text-forest-900'
+                                : 'bg-white/10 text-white/90 hover:bg-white/20 hover:text-white'
                                 }`}
                         >
                             <tab.icon size={18} />
@@ -350,19 +350,19 @@ const CompanyDashboard = () => {
                     {activeTab === 'analytics' && (
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <GlassCard className="p-6">
-                                <p className="text-sm font-bold text-forest-300 uppercase">Active Campaigns</p>
+                                <p className="text-sm font-bold text-white uppercase">Active Campaigns</p>
                                 <p className="text-4xl font-bold text-white mt-2">{campaigns.length}</p>
-                                <p className="text-xs text-forest-200 mt-1">Total campaigns running</p>
+                                <p className="text-xs text-white/70 mt-1">Total campaigns running</p>
                             </GlassCard>
                             <GlassCard className="p-6">
                                 <p className="text-sm font-bold text-amber-500 uppercase">Bottles Registered</p>
                                 <p className="text-4xl font-bold text-white mt-2">24</p>
-                                <p className="text-xs text-forest-200 mt-1">In your catalog</p>
+                                <p className="text-xs text-white/70 mt-1">In your catalog</p>
                             </GlassCard>
                             <GlassCard className="p-6">
                                 <p className="text-sm font-bold text-blue-500 uppercase">Collection Points</p>
                                 <p className="text-4xl font-bold text-white mt-2">{locations.length}</p>
-                                <p className="text-xs text-forest-200 mt-1">Active locations</p>
+                                <p className="text-xs text-white/70 mt-1">Active locations</p>
                             </GlassCard>
                         </div>
                     )}
@@ -371,7 +371,7 @@ const CompanyDashboard = () => {
                         <div className="space-y-6">
                             <GlassCard className="p-6">
                                 <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                                    <Plus size={20} className="text-forest-300" />
+                                    <Plus size={20} className="text-white" />
                                     New Campaign & Bottle
                                 </h3>
                                 <form onSubmit={handleAddCampaign} className="space-y-4">
@@ -397,7 +397,7 @@ const CompanyDashboard = () => {
                                                 {uploadedImage ? 'Change Image' : 'Upload Image'}
                                             </label>
                                             {isProcessingOCR && (
-                                                <div className="flex items-center gap-2 text-forest-300">
+                                                <div className="flex items-center gap-2 text-white">
                                                     <Loader className="animate-spin" size={16} />
                                                     <span className="text-sm">Processing OCR...</span>
                                                 </div>
@@ -408,10 +408,10 @@ const CompanyDashboard = () => {
                                             <div className="mt-4 flex gap-4">
                                                 <img src={uploadedImage} alt="Uploaded bottle" className="w-32 h-32 object-cover rounded-lg border-2 border-forest-200" />
                                                 <div className="flex-grow">
-                                                    <p className="text-xs text-forest-300 mb-2">Extracted Information:</p>
+                                                    <p className="text-xs text-white/80 mb-2">Extracted Information:</p>
                                                     <div className="bg-forest-50/10 p-3 rounded-lg">
                                                         <p className="text-sm font-medium text-white">
-                                                            Bottle Name: <span className="text-forest-300">{extractedBottleName || 'Processing...'}</span>
+                                                            Bottle Name: <span className="text-white">{extractedBottleName || 'Processing...'}</span>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -423,7 +423,7 @@ const CompanyDashboard = () => {
                                     {extractedBottleName && (
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-amber-50/50 p-4 rounded-xl">
                                             <div>
-                                                <label className="block text-sm font-medium text-forest-900 mb-2">
+                                                <label className="block text-sm font-medium text-white mb-2">
                                                     Bottle Name (Auto-detected)
                                                 </label>
                                                 <input
@@ -476,10 +476,10 @@ const CompanyDashboard = () => {
                                             <div className="flex justify-between items-start">
                                                 <div>
                                                     <h4 className="font-bold text-white">{camp.name}</h4>
-                                                    <p className="text-xs text-forest-200">Bottles: {camp.bottles.join(', ')}</p>
+                                                    <p className="text-xs text-white/80">Bottles: {camp.bottles.join(', ')}</p>
                                                 </div>
                                             </div>
-                                            <div className="flex gap-4 mt-2 text-sm text-forest-200">
+                                            <div className="flex gap-4 mt-2 text-sm text-white/80">
                                                 <span className="flex items-center gap-1 font-bold text-amber-600">
                                                     <DollarSign size={14} /> {camp.reward_amount || camp.reward} pts
                                                 </span>
@@ -521,7 +521,7 @@ const CompanyDashboard = () => {
                                                         </div>
                                                         <div>
                                                             <h4 className="font-bold text-white">{loc.name}</h4>
-                                                            <p className="text-sm text-forest-200">{loc.address}</p>
+                                                            <p className="text-sm text-white/80">{loc.address}</p>
                                                         </div>
                                                     </div>
                                                 </div>
