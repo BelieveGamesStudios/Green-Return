@@ -5,13 +5,12 @@ import {
     BarChart3, User, LogOut, Calendar, DollarSign, Upload, Loader
 } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { createWorker } from 'tesseract.js';
 import GlassCard from '../components/ui/GlassCard';
 import GlassButton from '../components/ui/GlassButton';
 import GlassInput from '../components/ui/GlassInput';
 import { supabase } from '../lib/supabase';
 import { resizeImage, blobToDataURL } from '../lib/imageUtils';
-import { extractBottleInfo } from '../lib/scannerUtils';
+import { extractBottleTextWithGemini } from '../lib/geminiService';
 
 // Sub-component for Bottle Management
 const BottlesManager = ({ companyId }) => {
@@ -167,7 +166,7 @@ const CompanyDashboard = () => {
         if (!file) return;
 
         setIsProcessingOCR(true);
-        toast('Processing image with OCR...', { icon: '🔍' });
+        toast('Processing image with AI...', { icon: '🤖' });
 
         try {
             // Resize and preview image
@@ -175,27 +174,28 @@ const CompanyDashboard = () => {
             const previewUrl = await blobToDataURL(resizedBlob);
             setUploadedImage(previewUrl);
 
-            // Run OCR
-            const worker = await createWorker('eng');
-            const { data: { text } } = await worker.recognize(resizedBlob);
-            await worker.terminate();
+            // Extract text using Gemini AI
+            const { bottleName, size, confidence } = await extractBottleTextWithGemini(resizedBlob);
 
-            // Extract bottle info
-            const { identifiedBrand, rawText } = extractBottleInfo(text);
+            if (bottleName && bottleName !== 'Unknown Bottle') {
+                setExtractedBottleName(bottleName);
+                if (size) setBottleSize(size);
 
-            if (identifiedBrand) {
-                setExtractedBottleName(identifiedBrand);
-                toast.success(`Detected: ${identifiedBrand}`);
+                const confidenceEmoji = confidence === 'high' ? '✅' : confidence === 'medium' ? '⚠️' : '❓';
+                toast.success(`${confidenceEmoji} Detected: ${bottleName}${size ? ` (${size})` : ''}`);
             } else {
-                // Use first meaningful word from raw text
-                const words = rawText.split(' ').filter(w => w.length > 3);
-                setExtractedBottleName(words[0] || 'Unknown Bottle');
-                toast('Bottle name extracted (please verify)', { icon: '⚠️' });
+                setExtractedBottleName('Unknown Bottle');
+                toast('Could not identify bottle. Please enter details manually.', { icon: '⚠️' });
             }
 
         } catch (err) {
-            console.error('OCR Error:', err);
-            toast.error('Failed to process image');
+            console.error('Gemini AI Error:', err);
+
+            if (err.message.includes('API key')) {
+                toast.error('Gemini API key not configured. Please add VITE_GEMINI_API_KEY to your .env file.');
+            } else {
+                toast.error('Failed to analyze image. Please try again or enter details manually.');
+            }
         } finally {
             setIsProcessingOCR(false);
         }
